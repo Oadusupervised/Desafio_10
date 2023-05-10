@@ -126,7 +126,7 @@ routerVistas.get('/register', registroView)
 
 routerVistas.get('/login',loginView)
 
-routerVistas.get('/current',extraerCredenciales,soloAutenticados, async (req,res,next)=>{
+routerVistas.get('/current',extraerCredenciales,soloAutenticados ,async (req,res,next)=>{
     res.render('current', {
         pageTitle: 'Perfil', user: req.user 
       })

@@ -4,8 +4,12 @@ import { cartManager } from '../Managers/CartManager.js';
 import { postUsuariosController } from '../controllers/usuarios.controller.js';
 import * as sesionesController from '../controllers/sesiones.controller.js'
 import { sesionesRouter } from './sessions.router.js'
+import { usuariosRouter } from './usuarios.router.js';
 
 export const apiRouter= Router()
+
+apiRouter.use('/sessions', sesionesRouter)
+apiRouter.use('/usuarios', usuariosRouter)
 
 apiRouter.use(express.json())
 apiRouter.use(express.urlencoded({ extended: true }))
@@ -15,9 +19,6 @@ apiRouter.use((error, req, res, next) => {
   }
   next(error)
 })
-
-apiRouter.use('/sessions', sesionesRouter)
-apiRouter.post('/usuarios',postUsuariosController);
 
 
 //le cargo productos al carrito

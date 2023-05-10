@@ -20,27 +20,6 @@ await conectar()
 
 const app =express()
 
-//await cartModel.insertMany(carts)
-//await messageModel.insertMany(messages)
-//await productModel.insertMany(products)
-
-hbs.registerHelper('json', function(context) {
-    return JSON.stringify(context);
-})
-app.use(cookieParser(COOKIE_SECRET))
-app.use(cors({ origin: "*" }));
-app.use(express.static("public"));
-//app.use(session)
-app.engine('handlebars', engine())
-app.set('views', './views')
-app.set('view engine', 'handlebars')
-app.use(express.json())
-app.use('/views',routerVistas)
-app.use('/api',apiRouter)
-//app.use('/', webRouter)
-
-//await cartModel.find().populate('nombreProducts.product')
-
 app.listen(PORT,()=>{
     console.log(`escuchando en puerto ${PORT}`)
     console.log('usar localhost:8080/views/realTimeProducts')
@@ -50,8 +29,29 @@ app.listen(PORT,()=>{
     console.log('usar localhost:8080/login')
     console.log('usar localhost:8080/views/current')
 
-
-
 })
+app.use(cookieParser(COOKIE_SECRET))
+
+//await cartModel.insertMany(carts)
+//await messageModel.insertMany(messages)
+//await productModel.insertMany(products)
+
+hbs.registerHelper('json', function(context) {
+    return JSON.stringify(context);
+})
+app.use(cors({ origin: "*" }));
+
+app.use(express.static("./public"));
+app.use(express.json())
+//app.use(session)
+app.engine('handlebars', engine())
+app.set('views', './views')
+app.set('view engine', 'handlebars')
+app.use('/views',routerVistas)
+app.use('/api',apiRouter)
+//app.use('/', webRouter)
+
+//await cartModel.find().populate('nombreProducts.product')
+
 
 //console.log(cartManager.buscarCosas() + 'estos son los carritos')

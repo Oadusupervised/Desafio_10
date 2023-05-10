@@ -4,16 +4,15 @@ export function extraerCredenciales(req,res,next){
   try{
     const token  = req.signedCookies.authToken
     const datosUsuarios = criptografiador.decodificarToken(token)
-    req.user = datosUsuarios
+    req.usuario = datosUsuarios
   }
-  catch(error){
+  catch(error){}
     next()
-  }
 }
 
 //autorizando
 export function soloAutenticados(req, res, next) {
-  if (!req.user) {
+  if (!req.usuario) {
     return next(new Error('AUTHORIZATION ERROR'))
   }
   next()
